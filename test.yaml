@@ -1,0 +1,17 @@
+#test-multiple-or-conditionnals.yaml
+---
+- name: "or conditionnals"
+  hosts: localhost
+  gather_facts: True
+  tasks:
+    - name: "Action on RedHat or Debian"
+      debug:
+        msg: "{{ ansible_hostname }} RedHat or Debian"
+      when: ansible_os_family == "RedHat" or
+            ansible_os_family == "Debian"
+    - name: "Action on CentOS 8 or Ubuntu"
+      debug:
+        msg: "{{ ansible_hostname }} CentOS 8 or Ubuntu systems"
+      when: (ansible_distribution == "CentOS" and
+            ansible_distribution_major_version == "8") or
+            ansible_distribution == "Ubuntu"

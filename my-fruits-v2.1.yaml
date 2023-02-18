@@ -1,0 +1,18 @@
+#my-fruits-v2.1.yaml
+---
+- name: "loop with register"
+  hosts: localhost
+  vars:
+    fruits:
+      - apple
+      - orange
+      - pineapple
+  tasks:
+    - name: "loop register"
+      shell: "echo {{ item }}"
+      loop: "{{ fruits }}"
+      register: echo
+    - name: "print result"
+      debug:
+        msg: "{{ item.stdout_lines }}"
+      loop: "{{ echo.results }}"

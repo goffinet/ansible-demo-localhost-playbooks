@@ -1,0 +1,18 @@
+#stuff.yaml
+---
+- debug:
+    msg: task2
+- debug:
+    msg: task3
+- debug:
+    msg: task4
+- debug:
+    msg: task5
+- debug:
+    msg: task6
+- debug:
+    msg: task7
+- debug:
+    msg: task8
+- debug:
+    msg: task9

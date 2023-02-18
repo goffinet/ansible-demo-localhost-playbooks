@@ -1,0 +1,23 @@
+#test-match-strings.yaml
+---
+- name: "Match strings"
+  hosts: localhost
+  gather_facts: False
+  vars:
+    url: "http://example.com/users/foo/resources/bar"
+  tasks:
+    - debug:
+        msg: "matched pattern 1"
+      when: url is match("http://example.com/users/.*/resources/")
+
+    - debug:
+        msg: "matched pattern 2"
+      when: url is search("/users/.*/resources/.*")
+
+    - debug:
+        msg: "matched pattern 3"
+      when: url is search("/users/")
+
+    - debug:
+        msg: "matched pattern 4"
+      when: url is regex("example.com/\w+/foo")

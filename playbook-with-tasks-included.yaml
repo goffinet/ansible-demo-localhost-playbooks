@@ -1,0 +1,11 @@
+#playbook-with-tasks-included.yaml
+---
+- name: "PLAY 1: playbook with tasks included"
+  hosts: localhost
+  connection: local
+  gather_facts: True
+  vars:
+    test: True
+  tasks:
+    - name: Include task list in play
+      include_tasks: some-tasks.yaml

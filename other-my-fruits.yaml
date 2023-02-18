@@ -1,0 +1,17 @@
+#other-my-fruits.yaml
+---
+- name: "other loop illustration"
+  hosts: localhost
+  vars:
+    fruits:
+      - name: apple
+        color: green
+      - name: orange
+        color: orange
+      - name: pineapple
+        color: yellow
+  tasks:
+    - name: "Print my Fruits"
+      debug:
+        msg: "This {{ item.name }} is {{ item.color }}"
+      loop: "{{ fruits }}"

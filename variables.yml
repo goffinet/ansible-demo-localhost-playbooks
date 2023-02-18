@@ -1,0 +1,10 @@
+#variables.yml
+---
+interface: eth0
+ipv4:
+  address: 192.168.1.1
+ipv6:
+  address:
+    - fe80::1
+    - fe80::11
+    - fe80::111

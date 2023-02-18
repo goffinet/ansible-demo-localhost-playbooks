@@ -1,0 +1,18 @@
+#inclusions.yaml
+---
+- hosts: all
+  tasks:
+    - debug:
+        msg: task1
+    - name: Include task list in play
+      include_tasks: stuff.yaml
+    - debug:
+        msg: task10
+- hosts: all
+  gather_facts: true
+  tasks:
+    - debug:
+        msg: task1
+    - name: Include task list in play only if the condition is true
+      include_tasks: other_stuff.yaml
+      when: hostvar is defined

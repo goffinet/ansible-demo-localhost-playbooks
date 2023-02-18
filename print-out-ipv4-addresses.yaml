@@ -1,0 +1,8 @@
+#print-out-ipv4-addresses.yaml
+---
+- name: print out ipv4 addresses
+  hosts: all
+  gather_facts: True
+  tasks:
+    - debug:
+        msg: "{{ ansible_all_ipv4_addresses }}"

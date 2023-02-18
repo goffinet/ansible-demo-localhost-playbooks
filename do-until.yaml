@@ -1,0 +1,11 @@
+#do-until.yml
+---
+- name: "Do-Until illustration"
+  hosts: localhost
+  tasks:
+    - name: "do the task until all systems go is viewed"
+      shell: "for x in {1..4}; do sleep 3 ; echo false ; done ; echo all systems go "
+      register: result
+      until: result.stdout.find("all systems go") != -1
+      retries: 5
+      delay: 10

@@ -1,0 +1,6 @@
+#data.yml
+---
+group: "omega"
+users:
+  - name: alfa
+  - name: beta

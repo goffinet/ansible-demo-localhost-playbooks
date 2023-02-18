@@ -1,0 +1,27 @@
+#df-th-v3.yaml
+---
+- name: "print df -Th"
+  hosts: localhost
+  gather_facts: True
+  vars:
+    root_partition_pattern: vda2 #change this pattern for your own needs
+  tasks:
+    - name: find total disk usage
+      shell: df -T | grep '{{ root_partition_pattern }}' | awk '{print $3}'
+      register: df_total
+    - name: print total disk usage
+      debug:
+        msg: "{{ df_total }}"
+    - name: find disk used
+      shell: df -T | grep '{{ root_partition_pattern }}' | awk '{print $4}'
+      register: df_used
+    - name: register disk used
+      set_fact:
+        used: "{{ df_used.stdout }}"
+    - name: print used var
+      debug:
+        msg: "{{ used|filesizeformat }}"
+    - name: print this when Root partition exceed 1G
+      debug:
+        msg: "Root partition exceed 1G"
+      when: used|int > 1000000000

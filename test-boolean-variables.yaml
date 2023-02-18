@@ -1,0 +1,22 @@
+#test-boolean-variables.yaml
+---
+- name: "test boolean variables"
+  hosts: localhost
+  gather_facts: False
+  vars:
+    orange: False # Boolean
+    pineapple: yes # Boolean
+    apple: "yes" # String
+  tasks:
+    - name: "Test if the var orange is False"
+      debug:
+        msg: "The var is False"
+      when: not orange
+    - name: "Test if the var pineapple is True"
+      debug:
+        msg: "The var pineapple is True"
+      when: pineapple
+    - name: "Test if the var apple is True"
+      debug:
+        msg: "The var apple is True"
+      when: apple|bool

@@ -1,0 +1,21 @@
+#test-if-a-list-value-is-true.yaml
+---
+- name: "Testing if a list value is True"
+  hosts: localhost
+  gather_facts: False
+  vars:
+    mylist:
+        - 1
+        - "{{ 3 == 3 }}"
+        - True
+    myotherlist:
+        - False
+        - True
+tasks:
+  - debug:
+      msg: "all are true!"
+    when: mylist is all
+
+  - debug:
+      msg: "at least one is true"
+    when: myotherlist is any

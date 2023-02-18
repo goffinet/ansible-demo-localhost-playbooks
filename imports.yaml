@@ -1,0 +1,10 @@
+#imports.yaml
+---
+- hosts: all
+  tasks:
+    - debug:
+        msg: task1
+    - name: Import task list in play
+      import_tasks: stuff.yaml
+    - debug:
+        msg: task10

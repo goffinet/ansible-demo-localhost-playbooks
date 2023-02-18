@@ -1,0 +1,21 @@
+#variables-playbook.yaml
+---
+- name: "PLAY 1: variables playbook"
+  hosts: localhost
+  gather_facts: True
+  vars:
+    variable: a new value
+  vars_files:
+    - variables.yml
+  vars_prompt:
+    name: response
+    prompt: "What do to want to do?"
+    private: no
+  tasks:
+    - name: "print variables"
+      debug:
+        msg:
+          - "variable value: {{ variable }},"
+          - "prompt value: {{ response }},"
+          - "interface {{ interface }}: {{ ipv4.address }},"
+          - "hostname: {{ ansible_hostname }}"

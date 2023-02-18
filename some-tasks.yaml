@@ -1,0 +1,26 @@
+#some-tasks.yaml
+---
+- name: "PRE-TASK 1: check connectivity"
+  ping:
+  register: output
+- name: "TASK 1: print variable output"
+  debug:
+    var: output
+  when: test == True
+- name: "TASK 2: print hostname"
+  debug:
+    msg: "{{ ansible_hostname }} is {{ output.ping }}ing"
+  when: test == True
+- name: "POST-TASK 1: Error handeling"
+  command: /bin/false
+  register: output
+  ignore_errors: True
+- name: "POST-TASK 2: Error handeling and idempotency"
+  command: /bin/false
+  register: output
+  ignore_errors: True
+  changed_when: output.rc == 0
+- name: "POST-TASK 3: Idempotency with True"
+  command: /bin/true
+  register: output
+  changed_when: output.rc == 1

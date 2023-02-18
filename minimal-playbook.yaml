@@ -1,0 +1,4 @@
+#minimal-playbook.yaml
+#a playbook with one play
+---
+- hosts: localhost

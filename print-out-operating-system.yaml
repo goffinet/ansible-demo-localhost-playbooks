@@ -1,0 +1,12 @@
+#print-out-operating-system.yaml
+---
+- name: print out operating system
+  hosts: localhost
+  gather_facts: False
+  tasks:
+    - name: "facts"
+      setup:
+      register: output
+    - name: "print output"
+      debug:
+        msg: "{{ output }}"

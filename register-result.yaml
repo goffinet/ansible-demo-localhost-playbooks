@@ -1,0 +1,26 @@
+#ansible-playbook register-result.yaml -v
+---
+- hosts: localhost
+  tasks:
+    - command: /bin/false
+      register: result
+      ignore_errors: True
+
+    - command: echo "print when result is failed"
+      when: result is failed
+
+    # In older versions of ansible use ``success``, now both are valid but succeeded uses the correct tense.
+    - command: echo "print when result is succeed"
+      when: result is succeeded
+
+    - command: echo "print when result is skipped"
+      when: result is skipped
+
+    - command: echo "print when result is defined"
+      when: result is defined
+
+    - set_fact:
+        result:
+
+    - command: echo "print when result is not defined"
+      when: ! result is defined

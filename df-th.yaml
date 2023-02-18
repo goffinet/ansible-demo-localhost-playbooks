@@ -1,0 +1,12 @@
+#df-th.yaml
+---
+- name: "print df -Th"
+  hosts: all
+  gather_facts: True
+  tasks:
+    - shell: df -Th
+      register: df_output
+    - set_fact:
+        df: "{{ df_output }}"
+    - debug:
+        msg: "{{ df.stdout_lines | list }}"

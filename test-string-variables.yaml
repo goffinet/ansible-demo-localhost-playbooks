@@ -1,0 +1,15 @@
+#test-string-variables.yaml
+---
+- name: "test string variables"
+  hosts: localhost
+  gather_facts: True
+  tasks:
+    - name: "Debian Action"
+      debug:
+        msg: "{{ ansible_hostname }} Debian host"
+      when: ansible_os_family == "Debian"
+      # note that all variables can be directly in conditionals without double curly braces
+    - name: "RedHat Action"
+      debug:
+        msg: "{{ ansible_hostname }} RedHat host"
+      when: ansible_os_family == "RedHat"

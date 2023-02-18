@@ -1,0 +1,23 @@
+#playbook-with-handler.yaml
+---
+- name: "PLAY 1: playbook with handler"
+  hosts: localhost
+  connection: local
+  gather_facts: False
+  vars_prompt:
+    - name: "response"
+      prompt: "Do you want execute the task?\n1- Yes\n2- no\n"
+      private: no
+  tasks:
+    - name: "TASK 1: always true"
+      command: "true"
+      notify: print state
+      when: response == "1"
+    - name: "TASK 1: always true"
+      debug:
+        msg: "Goodbye"
+      when: response == "2"
+  handlers:
+    - name: "print state"
+      debug:
+        msg: "CHANGED !!!"

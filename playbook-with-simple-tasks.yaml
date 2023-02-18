@@ -1,0 +1,25 @@
+#playbook-with-simple-tasks.yaml
+---
+- name: "PLAY 1: play with simple tasks"
+  hosts: localhost
+  connection: local
+  gather_facts: False
+  vars:
+    test: True
+  pre_tasks:
+    - name: "PRE-TASK 1: collect facts"
+      setup:
+  tasks:
+    - name: "TASK 1: check connectivity"
+      ping:
+    - name: "TASK 2: print hostname by var arg"
+      debug:
+        var: ansible_hostname
+    - name: "TASK 3: print hostname by msg arg"
+      debug:
+        msg: "{{ ansible_hostname }}"
+  post_tasks:
+    - name: "POST-TASK 1: Succeed"
+      command: /bin/true
+    - name: "POST-TASK 2: Error"
+      command: /bin/false

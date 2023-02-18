@@ -1,0 +1,14 @@
+#random-my-fruits.yaml
+---
+- name: "loop with register"
+  hosts: localhost
+  vars:
+    fruits:
+      - apple
+      - orange
+      - pineapple
+      - raspberry
+  tasks:
+    - name: "Print a random Fruit"
+      debug:
+        msg: "The chosen fruit is {{ fruits|random }}"

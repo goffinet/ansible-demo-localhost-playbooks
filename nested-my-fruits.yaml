@@ -1,0 +1,24 @@
+#nested-my-fruits.yaml
+---
+- name: "nested loop illustration"
+  hosts: localhost
+  vars:
+    fruits:
+      - id: 0
+        name: apple
+      - id: 1
+        name: orange
+      - id: 2
+        name: pineapple
+    colors:
+      - id: 0
+        name: green
+      - id: 1
+        name: orange
+      - id: 2
+        name: yellow
+  tasks:
+    - name: "Print my Fruits"
+      debug:
+        msg: "This {{ item.0.name }} can have the {{ item.1.name }} color"
+      loop: "{{ fruits|product(colors)|list }}"

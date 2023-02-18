@@ -1,0 +1,16 @@
+#df-th-v2.yaml
+---
+- name: "print df -Th"
+  hosts: all
+  gather_facts: True
+  vars:
+    root_partition_pattern: vda2 #change this pattern for your own needs
+  tasks:
+    - shell: df -T | grep '{{ root_partition_pattern }}' | awk '{print $3}'
+      register: df_total
+    - debug:
+        msg: "{{ df_total.stdout_lines }}"
+    - shell: df -T | grep '{{ root_partition_pattern }}' | awk '{print $4}'
+      register: df_used
+    - debug:
+        msg: "{{ df_used.stdout }}"

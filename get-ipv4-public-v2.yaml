@@ -1,0 +1,15 @@
+#get-ipv4-public-v2.yaml
+---
+- name: "get ipv4 public address"
+  hosts: localhost
+  gather_facts: True
+  tasks:
+    - ipinfoio_facts:
+    - set_fact:
+        dns_name: "{{ ansible_facts.ip }}.xip.io"
+    - debug:
+        msg: |
+             ip address : {{ ansible_facts.ip }}
+             dns name : {{ dns_name }}
+             real hostname : {{ ansible_hostname }}
+             inventory hostname : {{ inventory_hostname }}

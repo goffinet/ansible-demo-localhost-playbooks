@@ -1,0 +1,25 @@
+#test-defined-variables.yaml
+---
+- name: "test defined variables"
+  hosts: localhost
+  gather_facts: False
+  vars:
+    fruit: apple
+    drink:
+  tasks:
+    - name: "Print a the Fruit when the var is defined"
+      debug:
+        msg: "The var fruit is {{ fruit }}"
+      when: fruit is defined
+    - name: "Print a the Drink when the var is empty"
+      debug:
+        msg: "The var drink is {{ drink }}"
+      when: drink is defined
+    - name: "Do not print a the Drink when the var is empty"
+      debug:
+        msg: "The var drink is {{ drink }}"
+      when: drink != None
+    - name: "Do not print the Snackbar when the var is not defined"
+      debug:
+        msg: "The var snackbar is {{ snackbar }}"
+      when: ! snackbar is defined
